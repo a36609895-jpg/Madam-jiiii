@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Welcome to the Night ✨ | For Samriddhi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #050814;
+      --bg-mid: #0e1630;
+      --gold: #ffd166;
+      --rose-gold: #ff758f;
+      --blush: #ffccd5;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at top, #121b3d 0%, #090e24 55%, #040611 100%);
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    .font-serif-dreamy {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Procedural Starfield Canvas */
+    #bg-stars {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Ambient Moon Glow */
+    .moon-orb {
+      width: 92px;
+      height: 92px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 30% 30%, #fffbeb 0%, #ffd166 55%, #f59e0b 100%);
+      box-shadow: 0 0 45px rgba(255, 209, 102, 0.48), 0 0 95px rgba(255, 117, 143, 0.22);
+      animation: moonFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes moonFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-8px) scale(1.03); }
+    }
+
+    /* Glassmorphism Night Panel */
+    .glass-night {
+      background: rgba(14, 22, 48, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 209, 102, 0.18);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* Smooth Step Fade-Slide Entrance */
+    .step-enter {
+      animation: stepFadeSlide 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes stepFadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Typewriter Cursor */
+    .cursor-blink::after {
+      content: '|';
+      color: #ffd166;
+      animation: blink 0.9s infinite;
+      margin-left: 2px;
+    }
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* Primary Glowing Action Button */
+    .btn-glow {
+      background: linear-gradient(135deg, #ffd166 0%, #ff9ebb 55%, #ff758f 100%);
+      color: #090d1f;
+      font-weight: 700;
+      box-shadow: 0 0 25px rgba(255, 117, 143, 0.38), 0 0 15px rgba(255, 209, 102, 0.32);
+      transition: all 0.25s ease;
+    }
+    .btn-glow:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 36px rgba(255, 117, 143, 0.6), 0 0 22px rgba(255, 209, 102, 0.5);
+    }
+    .btn-glow:active {
+      transform: scale(0.97);
+    }
+
+    /* Drifting / Arcade Stars */
+    .drifting-star {
+      position: absolute;
+      cursor: pointer;
+      filter: drop-shadow(0 0 12px rgba(255, 209, 102, 0.95));
+      transition: transform 0.15s ease;
+      animation: starFloatPulse 1.8s ease-in-out infinite alternate;
+    }
+    .drifting-star:active {
+      transform: scale(1.35);
+    }
+
+    @keyframes starFloatPulse {
+      from { transform: translateY(-5px) scale(0.94) rotate(-8deg); }
+      to { transform: translateY(5px) scale(1.12) rotate(8deg); }
+    }
+
+    /* Sparkle Burst Particle */
+    .sparkle-burst {
+      position: absolute;
+      pointer-events: none;
+      animation: sparklePop 0.65s ease-out forwards;
+    }
+    @keyframes sparklePop {
+      0% { transform: scale(0.4); opacity: 1; }
+      100% { transform: scale(1.9) translateY(-18px); opacity: 0; }
+    }
+
+    /* Flower Bloom Pop */
+    @keyframes bloomPop {
+      0% { transform: scale(0.2) rotate(-18deg); opacity: 0; }
+      70% { transform: scale(1.15) rotate(6deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    .flower-bloomed {
+      animation: bloomPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* Heart-Shaped Envelope */
+    .lifafa-wrapper {
+      perspective: 1200px;
+    }
+
+    .heart-envelope {
+      position: relative;
+      width: 300px;
+      height: 265px;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: transform 0.35s ease;
+      filter: drop-shadow(0 22px 48px rgba(255, 117, 143, 0.42));
+    }
+    .heart-envelope:hover {
+      transform: scale(1.04);
+    }
+
+    .envelope-flap {
+      transform-origin: top center;
+      transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .heart-envelope.opened .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .seal-pulse {
+      animation: heartBeatSeal 1.5s ease-in-out infinite;
+    }
+    @keyframes heartBeatSeal {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.13); }
+      45% { transform: scale(0.97); }
+      65% { transform: scale(1.09); }
+    }
+
+    /* Parchment Letter Card */
+    .letter-parchment {
+      background: linear-gradient(165deg, #fffdf7 0%, #fff1f2 48%, #ffe4e6 100%);
+      color: #291d18;
+      box-shadow: 0 28px 75px rgba(0, 0, 0, 0.78), 0 0 45px rgba(255, 117, 143, 0.32);
+      border: 2px solid rgba(255, 117, 143, 0.45);
+      animation: slideLetterUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes slideLetterUp {
+      0% { opacity: 0; transform: translateY(45px) scale(0.94); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Floating Hearts in Finale */
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 60;
+      animation: floatUpHeart linear forwards;
+    }
+    @keyframes floatUpHeart {
+      0% { transform: translateY(0) scale(0.75) rotate(0deg); opacity: 0.95; }
+      100% { transform: translateY(-105vh) scale(1.25) rotate(24deg); opacity: 0; }
+    }
+
+    /* Custom Scrollbar */
+    .letter-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .letter-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 117, 143, 0.08);
+      border-radius: 10px;
+    }
+    .letter-scroll::-webkit-scrollbar-thumb {
+      background: rgba(225, 29, 72, 0.35);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="relative flex flex-col items-center justify-between min-h-screen px-4 py-4 sm:py-6">
+
+  <!-- Background Twinkling Starfield Canvas -->
+  <canvas id="bg-stars"></canvas>
+
+  <!-- Subtle Top Progress Bar (Never spoils future chapter titles!) -->
+  <header id="top-progress-bar" class="relative z-20 w-full max-w-2xl flex items-center justify-between gap-3 mb-3">
+    <div class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-night text-xs font-medium text-amber-200">
+      <span id="chapter-counter-label">Chapter 1 of 9</span>
+      <div id="chapter-dots" class="flex items-center gap-1"></div>
+    </div>
+
+    <button id="btn-sound-toggle" onclick="toggleSound()" class="px-3.5 py-1.5 rounded-full glass-night text-xs font-semibold text-rose-200 hover:border-amber-300/40 transition cursor-pointer flex items-center gap-1.5" aria-label="Toggle Sound">
+      <span id="sound-icon">🔊</span>
+      <span id="sound-text" class="hidden sm:inline">Chimes On</span>
+    </button>
+  </header>
+
+  <!-- Toast Notification (No alert() ever used) -->
+  <div id="toast-box" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-2">
+    <div id="toast-msg" class="px-5 py-2 rounded-full glass-night border border-amber-300/45 text-amber-100 text-xs sm:text-sm font-medium shadow-2xl text-center"></div>
+  </div>
+
+  <!-- Main Single-Step Viewport -->
+  <main class="relative z-10 w-full max-w-2xl mx-auto my-auto">
+
+    <!-- ==================== CHAPTER 1: WELCOME TO THE NIGHT ==================== -->
+    <section id="step-1" class="step-enter text-center flex flex-col items-center justify-center py-6 px-2">
+      <div class="moon-orb mb-7"></div>
+
+      <span class="uppercase tracking-[0.28em] text-[11px] font-semibold text-rose-200/85 mb-2">
+        A Quiet Little Corner of the Night
+      </span>
+
+      <h1 class="font-serif-dreamy text-4xl sm:text-6xl font-bold text-amber-100 tracking-wide mb-6 drop-shadow">
+        Welcome to the Night
+      </h1>
+
+      <div class="glass-night rounded-3xl px-6 py-7 sm:px-10 sm:py-8 max-w-lg w-full mb-8">
+        <p id="welcome-typewriter" class="text-lg sm:text-xl text-rose-50 font-medium leading-relaxed min-h-[3.6rem] cursor-blink"></p>
+      </div>
+
+      <button id="btn-start-night" onclick="goToStep(2)" class="hidden btn-glow px-8 py-4 rounded-full text-base sm:text-lg tracking-wide cursor-pointer">
+        Start the Night ✨
+      </button>
+    </section>
+
+    <!-- ==================== CHAPTER 2: CATCH THE STARS ==================== -->
+    <section id="step-2" class="hidden flex-col items-center w-full">
+      <div class="glass-night rounded-3xl p-5 sm:p-7 w-full">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-amber-100">Catch the Stars ⭐</h2>
+            <p class="text-xs sm:text-sm text-indigo-200/85">Tap the drifting stars in the sky to collect 5 little secrets.</p>
+          </div>
+          <div class="px-3.5 py-1.5 rounded-full bg-indigo-950/90 border border-amber-300/35 text-xs sm:text-sm font-bold text-amber-300 shrink-0">
+            <span id="ch2-count">0</span> / 5 ⭐
+          </div>
+        </div>
+
+        <!-- Drifting Star Playfield -->
+        <div id="ch2-arena" class="relative w-full h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-[#060a1d] to-[#111a3d] border border-amber-200/20 overflow-hidden mb-4"></div>
+
+        <!-- Unlocked Mini-Lines Stack -->
+        <div id="ch2-lines-list" class="space-y-2 mb-4">
+          <div class="rounded-xl bg-indigo-950/60 border border-indigo-400/20 p-3 text-center text-xs sm:text-sm text-indigo-200/80 italic">
+            "Tap any glowing star floating above..."
+          </div>
+        </div>
+
+        <div id="ch2-next-wrap" class="hidden text-center pt-1">
+          <button onclick="goToStep(3)" class="btn-glow px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer">
+            Continue to Next Surprise →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 3: MIDNIGHT CAFÉ ==================== -->
+    <section id="step-3" class="hidden flex-col items-center w-full">
+      <div class="glass-night rounded-3xl p-5 sm:p-7 w-full">
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <div>
+            <h2 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-amber-100">Midnight Café ☕</h2>
+            <p class="text-xs sm:text-sm text-indigo-200/85">Serve 3 late-night guests to uncover cozy secret notes.</p>
+          </div>
+          <span id="cafe-progress" class="px-3.5 py-1.5 rounded-full bg-amber-400/15 border border-amber-300/35 text-xs font-bold text-amber-200 shrink-0">
+            0 / 3 Served
+          </span>
+        </div>
+
+        <!-- Current Night-Owl Customer -->
+        <div id="cafe-customer-card" class="rounded-2xl bg-[#070c22] border border-amber-300/25 p-4 sm:p-5 mb-4 flex flex-col sm:flex-row items-center gap-4">
+          <div id="cafe-guest-avatar" class="w-16 h-16 rounded-2xl bg-indigo-900/70 border border-rose-300/30 flex items-center justify-center text-4xl shrink-0">
+            🦉
+          </div>
+          <div class="flex-1 text-center sm:text-left">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+              <h3 id="cafe-guest-name" class="font-bold text-amber-200 text-base">Sleepy Barn Owl</h3>
+              <span id="cafe-order-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-200 border border-rose-400/30">Order: Warm Caramel Latte</span>
+            </div>
+            <p id="cafe-recipe-hint" class="text-xs sm:text-sm text-indigo-200/85">Tap: <b>Espresso</b> + <b>Steamed Milk</b> + <b>Caramel</b></p>
+          </div>
+        </div>
+
+        <!-- Cup Tray -->
+        <div class="rounded-2xl bg-indigo-950/60 border border-indigo-400/20 p-3.5 mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs text-indigo-300 font-medium">Your Cup:</span>
+            <button onclick="resetCafeCup()" class="text-xs text-rose-300 hover:underline cursor-pointer">Clear Cup ↺</button>
+          </div>
+          <div id="cafe-cup-slots" class="flex flex-wrap gap-2 min-h-[2.2rem] items-center">
+            <span class="text-xs text-indigo-400 italic">Tap ingredients below to brew...</span>
+          </div>
+        </div>
+
+        <!-- Ingredient Buttons -->
+        <div id="cafe-controls" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-4">
+          <button onclick="addIngredient('Espresso')" class="p-3 rounded-xl bg-amber-950/65 hover:bg-amber-900/75 border border-amber-500/30 text-xs sm:text-sm font-semibold text-amber-100 cursor-pointer transition">☕ Espresso</button>
+          <button onclick="addIngredient('Steamed Milk')" class="p-3 rounded-xl bg-slate-800/75 hover:bg-slate-700/75 border border-slate-400/30 text-xs sm:text-sm font-semibold text-slate-100 cursor-pointer transition">🥛 Steamed Milk</button>
+          <button onclick="addIngredient('Caramel')" class="p-3 rounded-xl bg-amber-800/45 hover:bg-amber-700/55 border border-amber-400/30 text-xs sm:text-sm font-semibold text-amber-200 cursor-pointer transition">🍯 Caramel</button>
+          <button onclick="addIngredient('Dark Cocoa')" class="p-3 rounded-xl bg-orange-950/65 hover:bg-orange-900/75 border border-orange-500/30 text-xs sm:text-sm font-semibold text-orange-100 cursor-pointer transition">🍫 Dark Cocoa</button>
+          <button onclick="addIngredient('Starlight Matcha')" class="p-3 rounded-xl bg-emerald-950/65 hover:bg-emerald-900/75 border border-emerald-400/30 text-xs sm:text-sm font-semibold text-emerald-100 cursor-pointer transition">🍵 Starlight Matcha</button>
+          <button onclick="serveCoffee()" class="p-3 rounded-xl btn-glow text-xs sm:text-sm cursor-pointer">✨ Serve Cup</button>
+        </div>
+
+        <!-- Cozy Coaster Receipts -->
+        <div id="cafe-notes-list" class="space-y-2"></div>
+
+        <div id="cafe-complete-box" class="hidden mt-5 text-center">
+          <button onclick="goToStep(4)" class="btn-glow px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer">
+            Step Outside Into the Night →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 4: FIND ME UNDER THE STARS ==================== -->
+    <section id="step-4" class="hidden flex-col items-center w-full">
+      <div class="glass-night rounded-3xl p-5 sm:p-7 w-full">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-amber-100">Find Me Under The Stars 🌲✨</h2>
+            <p class="text-xs sm:text-sm text-indigo-200/85">Guide the little firefly spirit to light all 3 forest lanterns (tap adjacent tiles or use arrows).</p>
+          </div>
+          <span id="forest-lantern-count" class="px-3.5 py-1.5 rounded-full bg-amber-400/15 border border-amber-300/35 text-xs font-bold text-amber-200 shrink-0">
+            0 / 3 Lit
+          </span>
+        </div>
+
+        <!-- 7x5 Firefly Forest Grid -->
+        <div id="forest-grid" class="grid grid-cols-7 gap-1.5 sm:gap-2 p-3 rounded-2xl bg-[#05091a] border border-indigo-400/20 max-w-md mx-auto mb-4"></div>
+
+        <!-- Lantern Message -->
+        <div class="rounded-2xl bg-indigo-950/75 border border-amber-300/25 p-3.5 text-center mb-4 min-h-[3.8rem] flex items-center justify-center">
+          <p id="forest-message" class="text-xs sm:text-sm text-amber-100">
+            "Walk softly through the firefly woods toward the glowing lanterns..."
+          </p>
+        </div>
+
+        <!-- Touch D-Pad -->
+        <div class="flex flex-col items-center gap-1.5">
+          <button onclick="moveFirefly(0, -1)" class="w-12 h-11 rounded-xl glass-night border border-amber-300/30 text-amber-200 font-bold active:scale-95 cursor-pointer">↑</button>
+          <div class="flex gap-2">
+            <button onclick="moveFirefly(-1, 0)" class="w-12 h-11 rounded-xl glass-night border border-amber-300/30 text-amber-200 font-bold active:scale-95 cursor-pointer">←</button>
+            <button onclick="moveFirefly(0, 1)" class="w-12 h-11 rounded-xl glass-night border border-amber-300/30 text-amber-200 font-bold active:scale-95 cursor-pointer">↓</button>
+            <button onclick="moveFirefly(1, 0)" class="w-12 h-11 rounded-xl glass-night border border-amber-300/30 text-amber-200 font-bold active:scale-95 cursor-pointer">→</button>
+          </div>
+        </div>
+
+        <div id="forest-complete-box" class="hidden mt-5 text-center">
+          <button onclick="goToStep(5)" class="btn-glow px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer">
+            Enter the Mystery Room →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 5: THE MYSTERY ROOM ==================== -->
+    <section id="step-5" class="hidden flex-col items-center w-full">
+      <div class="glass-night rounded-3xl p-5 sm:p-7 w-full">
+        <div class="text-center mb-4">
+          <h2 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-amber-100">The Mystery Room 🔐</h2>
+          <p class="text-xs sm:text-sm text-indigo-200/85 mt-1">
+            Tap all 4 glowing objects in the room to uncover the 4-digit lock code.
+          </p>
+        </div>
+
+        <!-- 4 Inspectable Room Objects -->
+        <div class="grid grid-cols-2 gap-2.5 sm:gap-3 mb-4">
+          <button onclick="inspectRoomObject(0)" id="room-obj-0" class="p-3.5 rounded-2xl bg-indigo-950/75 hover:bg-indigo-900/75 border border-amber-300/25 text-left transition cursor-pointer flex items-center gap-3">
+            <span class="text-2xl sm:text-3xl">🪔</span>
+            <div>
+              <span class="block text-xs sm:text-sm font-bold text-amber-200">Desk Lamp</span>
+              <span id="room-tag-0" class="text-[11px] text-indigo-300">Tap to inspect</span>
+            </div>
+          </button>
+
+          <button onclick="inspectRoomObject(1)" id="room-obj-1" class="p-3.5 rounded-2xl bg-indigo-950/75 hover:bg-indigo-900/75 border border-amber-300/25 text-left transition cursor-pointer flex items-center gap-3">
+            <span class="text-2xl sm:text-3xl">📀</span>
+            <div>
+              <span class="block text-xs sm:text-sm font-bold text-amber-200">Old Vinyl Player</span>
+              <span id="room-tag-1" class="text-[11px] text-indigo-300">Tap to inspect</span>
+            </div>
+          </button>
+
+          <button onclick="inspectRoomObject(2)" id="room-obj-2" class="p-3.5 rounded-2xl bg-indigo-950/75 hover:bg-indigo-900/75 border border-amber-300/25 text-left transition cursor-pointer flex items-center gap-3">
+            <span class="text-2xl sm:text-3xl">🗺️</span>
+            <div>
+              <span class="block text-xs sm:text-sm font-bold text-amber-200">Framed Star Map</span>
+              <span id="room-tag-2" class="text-[11px] text-indigo-300">Tap to inspect</span>
+            </div>
+          </button>
+
+          <button onclick="inspectRoomObject(3)" id="room-obj-3" class="p-3.5 rounded-2xl bg-indigo-950/75 hover:bg-indigo-900/75 border border-amber-300/25 text-left transition cursor-pointer flex items-center gap-3">
+            <span class="text-2xl sm:text-3xl">⌚</span>
+            <div>
+              <span class="block text-xs sm:text-sm font-bold text-amber-200">Pocket Watch</span>
+              <span id="room-tag-3" class="text-[11px] text-indigo-300">Tap to inspect</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Active Clue Box -->
+        <div class="rounded-2xl bg-[#070c22] border border-rose-300/25 p-3.5 text-center mb-5 min-h-[3.8rem] flex items-center justify-center">
+          <p id="room-clue-display" class="text-xs sm:text-sm text-rose-100">
+            "Inspect the 4 objects above to reveal each digit of the lock..."
+          </p>
+        </div>
+
+        <!-- 4-Digit Keypad -->
+        <div class="max-w-xs mx-auto text-center">
+          <div id="passcode-display" class="flex justify-center gap-3 mb-3.5">
+            <div class="w-12 h-13 py-2.5 rounded-xl bg-[#060a1c] border border-amber-300/40 text-xl font-bold text-amber-200">•</div>
+            <div class="w-12 h-13 py-2.5 rounded-xl bg-[#060a1c] border border-amber-300/40 text-xl font-bold text-amber-200">•</div>
+            <div class="w-12 h-13 py-2.5 rounded-xl bg-[#060a1c] border border-amber-300/40 text-xl font-bold text-amber-200">•</div>
+            <div class="w-12 h-13 py-2.5 rounded-xl bg-[#060a1c] border border-amber-300/40 text-xl font-bold text-amber-200">•</div>
+          </div>
+
+          <div id="room-keypad" class="grid grid-cols-3 gap-2">
+            <button onclick="pressKey('1')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">1</button>
+            <button onclick="pressKey('2')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">2</button>
+            <button onclick="pressKey('3')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">3</button>
+            <button onclick="pressKey('4')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">4</button>
+            <button onclick="pressKey('5')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">5</button>
+            <button onclick="pressKey('6')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">6</button>
+            <button onclick="pressKey('7')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">7</button>
+            <button onclick="pressKey('8')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">8</button>
+            <button onclick="pressKey('9')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">9</button>
+            <button onclick="clearPasscode()" class="py-2.5 rounded-xl bg-rose-950/65 border border-rose-400/30 text-xs font-bold text-rose-200 cursor-pointer">Clear</button>
+            <button onclick="pressKey('0')" class="py-2.5 rounded-xl glass-night hover:border-amber-300/50 text-base font-bold text-white cursor-pointer">0</button>
+            <button onclick="checkPasscode()" class="py-2.5 rounded-xl btn-glow text-xs font-bold cursor-pointer">Unlock 🔓</button>
+          </div>
+
+          <div id="room-complete-box" class="hidden mt-5">
+            <button onclick="goToStep(6)" class="btn-glow px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer">
+              Next: A Little Challenge →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 6: CATCH MY STARS (30s ARCADE) ==================== -->
+    <section id="step-6" class="hidden flex-col items-center w-full">
+      <div class="glass-night rounded-3xl p-5 sm:p-7 w-full">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-amber-100">Catch My Stars ⚡⭐</h2>
+            <p class="text-xs sm:text-sm text-indigo-200/85">30-second star shower! Catch stars to unlock special compliments.</p>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <div class="px-3 py-1 rounded-xl bg-indigo-950/90 border border-amber-300/30 text-center">
+              <span class="block text-[10px] uppercase text-indigo-300">Time</span>
+              <span id="arcade-timer" class="text-sm sm:text-base font-bold text-amber-300">30s</span>
+            </div>
+            <div class="px-3 py-1 rounded-xl bg-indigo-950/90 border border-rose-300/30 text-center">
+              <span class="block text-[10px] uppercase text-indigo-300">Stars</span>
+              <span id="arcade-score" class="text-sm sm:text-base font-bold text-rose-300">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 30s Arcade Arena -->
+        <div id="arcade-arena" class="relative w-full h-60 sm:h-68 rounded-2xl bg-gradient-to-b from-[#050817] to-[#11193d] border border-amber-200/20 overflow-hidden mb-4">
+          <div id="arcade-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/65 backdrop-blur-xs z-10 p-4 text-center">
+            <p class="text-sm text-amber-100 mb-3 max-w-xs">Tap falling golden &amp; shooting stars before the timer hits zero!</p>
+            <button onclick="startArcadeGame()" class="btn-glow px-6 py-3 rounded-full text-sm cursor-pointer">Start 30s Challenge ⚡</button>
+          </div>
+        </div>
+
+        <!-- Milestone Compliments Unlocked -->
+        <div id="arcade-compliments-list" class="space-y-1.5 max-h-36 overflow-y-auto letter-scroll mb-4">
+          <div class="rounded-xl bg-indigo-950/60 border border-indigo-400/20 p-2.5 text-center text-xs text-indigo-300 italic">
+            Milestones unlock at 3, 6, 10, 14 &amp; 18 stars ✨
+          </div>
+        </div>
+
+        <div id="arcade-complete-box" class="hidden text-center">
+          <button onclick="goToStep(7)" class="btn-glow px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer">
+            Continue →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 7: CONNECT THE STARS ==================== -->
+    <section id="step-7" class="hidden flex-col items-center w-full">
+      <div class="glass-night rounded-3xl p-5 sm:p-7 w-full text-center">
+        <h2 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-amber-100">Connect The Stars ✨</h2>
+        <p class="text-xs sm:text-sm text-indigo-200/85 mb-4">Tap or drag through the glowing stars in order (1 → 10) to complete the constellation.</p>
+
+        <div class="relative w-full h-72 sm:h-80 rounded-2xl bg-gradient-to-b from-[#040714] to-[#0e1634] border border-amber-200/25 overflow-hidden mb-4">
+          <canvas id="constellation-canvas" class="w-full h-full block cursor-pointer touch-none"></canvas>
+        </div>
+
+        <div id="constellation-reveal" class="hidden rounded-2xl bg-gradient-to-r from-amber-500/15 via-rose-500/20 to-amber-500/15 border border-amber-300/40 p-4">
+          <p class="font-serif-dreamy text-2xl sm:text-3xl font-bold text-amber-200 tracking-[0.22em] mb-1">✨ S A M R I D D H I ✨</p>
+          <p class="text-xs sm:text-sm text-rose-100 mb-4">A heart in the sky written with your name.</p>
+          <button onclick="goToStep(8)" class="btn-glow px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer">
+            Walk to the Garden →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 8: THE LITTLE GARDEN ==================== -->
+    <section id="step-8" class="hidden flex-col items-center w-full">
+      <div class="glass-night rounded-3xl p-5 sm:p-7 w-full">
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <div>
+            <h2 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-amber-100">The Little Garden 🌷</h2>
+            <p class="text-xs sm:text-sm text-indigo-200/85">Water all 5 moonlit sprouts to see why you're so special.</p>
+          </div>
+          <span id="garden-count" class="px-3.5 py-1.5 rounded-full bg-rose-400/15 border border-rose-300/35 text-xs font-bold text-rose-200 shrink-0">
+            0 / 5 Bloomed
+          </span>
+        </div>
+
+        <!-- 5 Flower Sprouts -->
+        <div id="garden-plots" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mb-4"></div>
+
+        <!-- Petal Reason Display -->
+        <div class="rounded-2xl bg-indigo-950/75 border border-rose-300/25 p-4 text-center min-h-[4.4rem] flex items-center justify-center mb-4">
+          <p id="garden-reason-text" class="text-xs sm:text-sm text-rose-100 italic">
+            "Tap a glowing sprout to water it with starlight..."
+          </p>
+        </div>
+
+        <div id="garden-complete-box" class="hidden text-center">
+          <button onclick="goToStep(9)" class="btn-glow px-7 py-3.5 rounded-full text-sm sm:text-base cursor-pointer">
+            Something Waiting For You... 💌
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FINALE (STEP 9): HEART-SHAPED ENVELOPE ==================== -->
+    <section id="step-9" class="hidden flex-col items-center justify-center w-full py-2">
+      <!-- Closed Heart Envelope -->
+      <div id="lifafa-closed-stage" class="text-center my-2 lifafa-wrapper">
+        <span class="uppercase tracking-[0.25em] text-[11px] font-semibold text-rose-300">The Final Surprise</span>
+        <h2 class="font-serif-dreamy text-3xl sm:text-5xl font-bold text-amber-100 mt-1 mb-2">
+          For Samriddhi ❤️
+        </h2>
+        <p class="text-xs sm:text-sm text-indigo-200/85 mb-6">
+          Tap the golden <b>S</b> wax seal on the heart envelope to open it...
+        </p>
+
+        <div id="heart-envelope-box" onclick="openHeartLifafa()" class="heart-envelope">
+          <svg viewBox="0 0 320 290" class="w-full h-full overflow-visible">
+            <defs>
+              <linearGradient id="heartBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#be123c" />
+                <stop offset="50%" stop-color="#e11d48" />
+                <stop offset="100%" stop-color="#881337" />
+              </linearGradient>
+              <linearGradient id="heartFlapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fda4af" />
+                <stop offset="100%" stop-color="#be123c" />
+              </linearGradient>
+              <radialGradient id="waxSealGrad" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#fef3c7" />
+                <stop offset="55%" stop-color="#ffd166" />
+                <stop offset="100%" stop-color="#d97706" />
+              </radialGradient>
+            </defs>
+
+            <!-- Heart Body -->
+            <path d="M160 272 C160 272 24 190 24 96 C24 46 64 16 106 16 C134 16 152 32 160 48 C168 32 186 16 214 16 C256 16 296 46 296 96 C296 190 160 272 160 272 Z"
+                  fill="url(#heartBodyGrad)" stroke="#ffccd5" stroke-width="2.5" />
+
+            <!-- Inner Pocket Crease -->
+            <path d="M40 120 L160 205 L280 120" fill="none" stroke="rgba(255,228,230,0.35)" stroke-width="2" />
+
+            <!-- Top Heart Flap -->
+            <g class="envelope-flap">
+              <path d="M26 92 C28 45 66 16 106 16 C134 16 152 32 160 48 C168 32 186 16 214 16 C254 16 292 45 294 92 L160 176 Z"
+                    fill="url(#heartFlapGrad)" stroke="#ffe4e6" stroke-width="2" />
+            </g>
+
+            <!-- Wax Seal with 'S' -->
+            <g class="seal-pulse" transform="translate(160, 152)">
+              <circle cx="0" cy="0" r="27" fill="url(#waxSealGrad)" stroke="#fffbeb" stroke-width="2" />
+              <text x="0" y="8" text-anchor="middle" font-family="Cormorant Garamond, serif" font-weight="700" font-size="26" fill="#78350f">S</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Opened Letter Card (Exact Verbatim Message) -->
+      <div id="lifafa-letter-stage" class="hidden w-full max-w-2xl mx-auto">
+        <div class="letter-parchment rounded-3xl p-6 sm:p-10 relative">
+          <div class="flex items-center justify-between border-b border-rose-900/15 pb-4 mb-5">
+            <div>
+              <span class="text-[11px] uppercase tracking-[0.22em] text-rose-800/75 font-bold">From the Heart</span>
+              <h3 class="font-serif-dreamy text-3xl sm:text-4xl font-bold text-rose-900">For Samriddhi ❤️</h3>
+            </div>
+            <span class="text-3xl">💌</span>
+          </div>
+
+          <div class="letter-scroll max-h-[60vh] overflow-y-auto pr-1 space-y-4 text-[15px] sm:text-base leading-relaxed font-medium text-stone-800">
+            <p>I don’t know why, but jab bhi main tujhe dekhta hoon na, my heartbeat literally gets faster. Especially jab tu hasti hai, I swear, mera mann karta hai bas tujhe dekhta rahun. I don’t even feel like looking anywhere else.</p>
+
+            <p>And kal jab tune kajal lagaya tha… MY GOD! 😭 I was literally speechless. Upar se those open hairs, brooo, I can’t even explain. Ek second ke liye laga ki bas waqt wahi ruk jaaye aur main tujhe dekhta rahun.</p>
+
+            <p>And jab tu thoda sa pout karti hai na, bruhhh, I’m gone. 😭❤️</p>
+
+            <p>It’s not just about your looks. Mujhe tera character, tera style, tera way of talking, teri little habits, everything feels special. I don’t know how to explain it, but there’s something about you that makes me smile without any reason.</p>
+
+            <p>Honestly, I don’t just like looking at you. I like the person you are. And if I ever get the chance, I’d love to make more memories with you, spend time with you and just live those little moments together.</p>
+
+            <p>I don’t know what the future holds, but one thing I know is that I genuinely love the feeling of having you around.</p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-rose-900/15 flex flex-wrap items-center justify-between gap-3">
+            <button onclick="replayWholeJourney()" class="px-4 py-2 rounded-full bg-rose-950/10 hover:bg-rose-950/20 text-rose-900 text-xs font-bold transition cursor-pointer">
+              ↺ Replay From Beginning
+            </button>
+            <button onclick="spawnHeartShower()" class="px-5 py-2 rounded-full bg-rose-600 text-white text-xs font-bold shadow hover:bg-rose-700 transition cursor-pointer">
+              Send More Hearts ❤️
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="relative z-10 text-center text-[11px] text-indigo-300/50 mt-4">
+    Made under the midnight stars ✨
+  </footer>
+
+  <script>
+    /* ==================== 1. PROCEDURAL STARFIELD CANVAS ==================== */
+    const bgCanvas = document.getElementById('bg-stars');
+    const bgCtx = bgCanvas.getContext('2d');
+    let bgStars = [];
+
+    function resizeBgCanvas() {
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+      bgStars = Array.from({ length: 140 }, () => ({
+        x: Math.random() * bgCanvas.width,
+        y: Math.random() * bgCanvas.height,
+        r: Math.random() * 1.7 + 0.4,
+        alpha: Math.random(),
+        speed: Math.random() * 0.015 + 0.004
+      }));
+    }
+
+    function animateBgStars() {
+      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+      for (const s of bgStars) {
+        s.alpha += s.speed;
+        if (s.alpha >= 1 || s.alpha <= 0.15) s.speed *= -1;
+        bgCtx.beginPath();
+        bgCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        bgCtx.fillStyle = `rgba(255, 236, 179, ${s.alpha})`;
+        bgCtx.fill();
+      }
+      requestAnimationFrame(animateBgStars);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeBgCanvas();
+      if (currentStep === 7) initConstellationCanvas();
+    });
+    resizeBgCanvas();
+    animateBgStars();
+
+    /* ==================== 2. WEB AUDIO API GENTLE CHIMES ==================== */
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function playChime(freq = 523.25, type = 'sine', duration = 0.28) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      document.getElementById('sound-text').textContent = soundEnabled ? 'Chimes On' : 'Muted';
+      if (soundEnabled) playChime(659.25, 'sine', 0.25);
+    }
+
+    /* ==================== 3. STRICT SEQUENTIAL STEP CONTROLLER ==================== */
+    let currentStep = 1;
+    const totalSteps = 9;
+
+    function renderProgressDots() {
+      const label = document.getElementById('chapter-counter-label');
+      const dots = document.getElementById('chapter-dots');
+      label.textContent = currentStep === 9 ? 'Finale • Secret Note' : `Chapter ${currentStep} of ${totalSteps}`;
+      dots.innerHTML = '';
+      for (let i = 1; i <= totalSteps; i++) {
+        const dot = document.createElement('span');
+        dot.className = i < currentStep
+          ? 'w-2 h-2 rounded-full bg-amber-300'
+          : i === currentStep
+            ? 'w-2.5 h-2.5 rounded-full bg-rose-400 shadow'
+            : 'w-1.5 h-1.5 rounded-full bg-indigo-400/35';
+        dots.appendChild(dot);
+      }
+    }
+
+    function goToStep(stepNum) {
+      // Strictly prevent jumping ahead more than 1 step
+      if (stepNum > currentStep + 1) return;
+
+      playChime(587.33, 'sine', 0.35);
+      currentStep = stepNum;
+      renderProgressDots();
+
+      for (let i = 1; i <= totalSteps; i++) {
+        const el = document.getElementById(`step-${i}`);
+        el.classList.add('hidden');
+        el.classList.remove('flex', 'step-enter');
+      }
+
+      const target = document.getElementById(`step-${stepNum}`);
+      target.classList.remove('hidden');
+      target.classList.add('flex', 'step-enter');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (stepNum === 2) initChapter2Stars();
+      if (stepNum === 3) renderCafeOrder();
+      if (stepNum === 4) renderForestGrid();
+      if (stepNum === 7) setTimeout(initConstellationCanvas, 60);
+      if (stepNum === 8) renderGardenPlots();
+    }
+
+    let toastTimeout;
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-msg').textContent = msg;
+      box.classList.remove('opacity-0', '-translate-y-2');
+      box.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        box.classList.remove('opacity-100', 'translate-y-0');
+        box.classList.add('opacity-0', '-translate-y-2');
+      }, 2400);
+    }
+
+    /* ==================== CHAPTER 1: TYPEWRITER ==================== */
+    const welcomeText = "Hey Samriddhi, can't sleep? Let's play a little game.";
+    let typeIdx = 0;
+
+    function runWelcomeTypewriter() {
+      const el = document.getElementById('welcome-typewriter');
+      if (typeIdx < welcomeText.length) {
+        el.textContent += welcomeText.charAt(typeIdx);
+        typeIdx++;
+        setTimeout(runWelcomeTypewriter, 52);
+      } else {
+        document.getElementById('btn-start-night').classList.remove('hidden');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProgressDots();
+      setTimeout(runWelcomeTypewriter, 450);
+    });
+
+    /* ==================== CHAPTER 2: CATCH 5 DRIFTING STARS ==================== */
+    const ch2MiniLines = [
+      "1. Even a quiet midnight feels brighter when you're awake ✨",
+      "2. Your smile has a way of making everything else fade out 🌙",
+      "3. There's something effortlessly special about your vibe 💫",
+      "4. Little moments with you always end up being my favorite 🌸",
+      "5. All 5 stars caught! Ready for the next surprise? ❤️"
+    ];
+    let ch2Caught = 0;
+
+    function initChapter2Stars() {
+      const arena = document.getElementById('ch2-arena');
+      arena.innerHTML = '';
+      ch2Caught = 0;
+      document.getElementById('ch2-count').textContent = '0';
+
+      const positions = [
+        { left: '15%', top: '22%' },
+        { left: '72%', top: '18%' },
+        { left: '44%', top: '46%' },
+        { left: '20%', top: '68%' },
+        { left: '76%', top: '64%' }
+      ];
+
+      positions.forEach((pos, idx) => {
+        const star = document.createElement('button');
+        star.type = 'button';
+        star.className = 'drifting-star text-3xl sm:text-4xl p-2';
+        star.style.left = pos.left;
+        star.style.top = pos.top;
+        star.style.animationDelay = `${idx * 0.35}s`;
+        star.textContent = idx % 2 === 0 ? '⭐' : '🌟';
+
+        star.onclick = () => {
+          playChime(523.25 + ch2Caught * 80, 'triangle', 0.3);
+
+          // Sparkle burst effect
+          const burst = document.createElement('span');
+          burst.className = 'sparkle-burst text-2xl';
+          burst.style.left = pos.left;
+          burst.style.top = pos.top;
+          burst.textContent = '✨';
+          arena.appendChild(burst);
+          setTimeout(() => burst.remove(), 650);
+
+          star.remove();
+          ch2Caught++;
+          document.getElementById('ch2-count').textContent = ch2Caught;
+
+          const list = document.getElementById('ch2-lines-list');
+          if (ch2Caught === 1) list.innerHTML = '';
+          const lineItem = document.createElement('div');
+          lineItem.className = 'rounded-xl bg-amber-400/12 border border-amber-300/30 px-3.5 py-2 text-xs sm:text-sm text-amber-100 step-enter';
+          lineItem.textContent = ch2MiniLines[ch2Caught - 1];
+          list.appendChild(lineItem);
+
+          if (ch2Caught === 5) {
+            document.getElementById('ch2-next-wrap').classList.remove('hidden');
+          }
+        };
+
+        arena.appendChild(star);
+      });
+    }
+
+    /* ==================== CHAPTER 3: MIDNIGHT CAFÉ ==================== */
+    const cafeOrders = [
+      {
+        avatar: '🦉',
+        guest: 'Sleepy Barn Owl',
+        drink: 'Warm Caramel Latte',
+        ingredients: ['Espresso', 'Steamed Milk', 'Caramel'],
+        note: 'Coaster Note #1: "If we ever grab late-night coffee together, I know I wouldn\'t stop smiling."'
+      },
+      {
+        avatar: '🐈‍⬛',
+        guest: 'Stargazer Black Cat',
+        drink: 'Midnight Mocha',
+        ingredients: ['Espresso', 'Steamed Milk', 'Dark Cocoa'],
+        note: 'Coaster Note #2: "Your laugh is honestly sweeter than anything on this café menu."'
+      },
+      {
+        avatar: '🦊',
+        guest: 'Moonlit Little Fox',
+        drink: 'Starlight Matcha',
+        ingredients: ['Steamed Milk', 'Starlight Matcha'],
+        note: 'Coaster Note #3: "Just having you around makes even an ordinary night feel special."'
+      }
+    ];
+
+    let currentOrderIdx = 0;
+    let currentCup = [];
+
+    function renderCafeOrder() {
+      const order = cafeOrders[currentOrderIdx];
+      document.getElementById('cafe-progress').textContent = `${currentOrderIdx} / 3 Served`;
+      if (!order) return;
+
+      document.getElementById('cafe-guest-avatar').textContent = order.avatar;
+      document.getElementById('cafe-guest-name').textContent = order.guest;
+      document.getElementById('cafe-order-badge').textContent = `Order: ${order.drink}`;
+      document.getElementById('cafe-recipe-hint').innerHTML = `Tap: <b>${order.ingredients.join('</b> + <b>')}</b>`;
+      resetCafeCup();
+    }
+
+    function addIngredient(item) {
+      if (currentOrderIdx >= cafeOrders.length) return;
+      if (currentCup.length >= 3) {
+        showToast('Cup is ready! Tap Serve Cup ✨');
+        return;
+      }
+      playChime(440, 'sine', 0.15);
+      currentCup.push(item);
+      updateCupUI();
+    }
+
+    function resetCafeCup() {
+      currentCup = [];
+      updateCupUI();
+    }
+
+    function updateCupUI() {
+      const container = document.getElementById('cafe-cup-slots');
+      if (currentCup.length === 0) {
+        container.innerHTML = `<span class="text-xs text-indigo-400 italic">Tap ingredients below to brew...</span>`;
+        return;
+      }
+      container.innerHTML = currentCup
+        .map(ing => `<span class="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-xs font-semibold text-amber-200">${ing}</span>`)
+        .join('');
+    }
+
+    function serveCoffee() {
+      if (currentOrderIdx >= cafeOrders.length) return;
+      const order = cafeOrders[currentOrderIdx];
+      const isMatch =
+        order.ingredients.length === currentCup.length &&
+        order.ingredients.every(ing => currentCup.includes(ing));
+
+      if (!isMatch) {
+        showToast('Check the ingredients above and try again ☕');
+        resetCafeCup();
+        return;
+      }
+
+      playChime(659.25, 'triangle', 0.35);
+      const notesList = document.getElementById('cafe-notes-list');
+      const noteEl = document.createElement('div');
+      noteEl.className = 'rounded-xl bg-rose-500/15 border border-rose-300/35 px-4 py-2.5 text-xs sm:text-sm text-rose-100 step-enter';
+      noteEl.textContent = `🧾 ${order.note}`;
+      notesList.appendChild(noteEl);
+
+      currentOrderIdx++;
+      if (currentOrderIdx < cafeOrders.length) {
+        renderCafeOrder();
+      } else {
+        document.getElementById('cafe-progress').textContent = '3 / 3 Served';
+        document.getElementById('cafe-guest-name').textContent = 'All Guests Served!';
+        document.getElementById('cafe-order-badge').textContent = 'Midnight Shift Complete ☕';
+        document.getElementById('cafe-recipe-hint').textContent = 'Every secret coaster note has been unlocked.';
+        document.getElementById('cafe-controls').classList.add('hidden');
+        document.getElementById('cafe-complete-box').classList.remove('hidden');
+      }
+    }
+
+    /* ==================== CHAPTER 4: FIND ME UNDER THE STARS ==================== */
+    const forestCols = 7;
+    const forestRows = 5;
+    let fireflyPos = { x: 0, y: 2 };
+    const forestTrees = new Set(['1,1', '1,3', '3,0', '3,2', '3,4', '5,1', '5,3']);
+    const forestLanterns = [
+      { x: 2, y: 0, lit: false, msg: "Lantern 1: No matter how dark the night gets, your smile feels like warm starlight ✨" },
+      { x: 4, y: 4, lit: false, msg: "Lantern 2: Your style, your way of talking, and your little habits are effortlessly memorable 🌙" },
+      { x: 6, y: 2, lit: false, msg: "Lantern 3: All 3 lanterns lit! Every path leads right to you ❤️" }
+    ];
+
+    function renderForestGrid() {
+      const grid = document.getElementById('forest-grid');
+      grid.innerHTML = '';
+
+      for (let y = 0; y < forestRows; y++) {
+        for (let x = 0; x < forestCols; x++) {
+          const cell = document.createElement('button');
+          cell.type = 'button';
+          cell.className = 'aspect-square rounded-xl flex items-center justify-center text-lg sm:text-2xl transition-all cursor-pointer';
+
+          const key = `${x},${y}`;
+          const lantern = forestLanterns.find(l => l.x === x && l.y === y);
+
+          if (fireflyPos.x === x && fireflyPos.y === y) {
+            cell.classList.add('bg-amber-400/25', 'border', 'border-amber-300', 'shadow-lg');
+            cell.textContent = '🧚‍♀️';
+          } else if (lantern) {
+            cell.classList.add(
+              lantern.lit ? 'bg-amber-500/30' : 'bg-indigo-900/65',
+              'border',
+              lantern.lit ? 'border-amber-300' : 'border-amber-400/45'
+            );
+            cell.textContent = lantern.lit ? '🏮' : '🕯️';
+          } else if (forestTrees.has(key)) {
+            cell.classList.add('bg-slate-900/90');
+            cell.textContent = '🌲';
+          } else {
+            cell.classList.add('bg-indigo-950/45', 'border', 'border-indigo-500/10');
+            cell.textContent = '·';
+          }
+
+          // Allow tapping adjacent tiles directly on mobile!
+          cell.onclick = () => {
+            const dx = x - fireflyPos.x;
+            const dy = y - fireflyPos.y;
+            if (Math.abs(dx) + Math.abs(dy) === 1) {
+              moveFirefly(dx, dy);
+            }
+          };
+
+          grid.appendChild(cell);
+        }
+      }
+    }
+
+    function moveFirefly(dx, dy) {
+      const nx = fireflyPos.x + dx;
+      const ny = fireflyPos.y + dy;
+      if (nx < 0 || nx >= forestCols || ny < 0 || ny >= forestRows) return;
+      if (forestTrees.has(`${nx},${ny}`)) {
+        showToast('A pine tree blocks the path 🌲');
+        return;
+      }
+
+      playChime(493.88, 'sine', 0.12);
+      fireflyPos = { x: nx, y: ny };
+      const lantern = forestLanterns.find(l => l.x === nx && l.y === ny);
+      if (lantern && !lantern.lit) {
+        lantern.lit = true;
+        playChime(783.99, 'triangle', 0.35);
+        document.getElementById('forest-message').textContent = `"${lantern.msg}"`;
+        const litCount = forestLanterns.filter(l => l.lit).length;
+        document.getElementById('forest-lantern-count').textContent = `${litCount} / 3 Lit`;
+        if (litCount === 3) {
+          document.getElementById('forest-complete-box').classList.remove('hidden');
+        }
+      }
+      renderForestGrid();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (currentStep !== 4) return;
+      if (e.key === 'ArrowUp' || e.key === 'w') { e.preventDefault(); moveFirefly(0, -1); }
+      if (e.key === 'ArrowDown' || e.key === 's') { e.preventDefault(); moveFirefly(0, 1); }
+      if (e.key === 'ArrowLeft' || e.key === 'a') { e.preventDefault(); moveFirefly(-1, 0); }
+      if (e.key === 'ArrowRight' || e.key === 'd') { e.preventDefault(); moveFirefly(1, 0); }
+    });
+
+    /* ==================== CHAPTER 5: THE MYSTERY ROOM ==================== */
+    const roomClues = [
+      { digit: '1', text: '🪔 Desk Lamp: "Only 1 moon watches over us tonight." → Digit 1 is 1' },
+      { digit: '4', text: '📀 Vinyl Player: "Count the letters in the word L-O-V-E." → Digit 2 is 4' },
+      { digit: '3', text: '🗺️ Star Map: "3 little wishes written across the sky." → Digit 3 is 3' },
+      { digit: '0', text: '⌚ Pocket Watch: "Zero doubts about how special you are." → Digit 4 is 0' }
+    ];
+    let enteredCode = '';
+
+    function inspectRoomObject(idx) {
+      playChime(587.33 + idx * 55, 'sine', 0.25);
+      document.getElementById('room-clue-display').textContent = roomClues[idx].text;
+      document.getElementById(`room-tag-${idx}`).textContent = `Digit: ${roomClues[idx].digit}`;
+      document.getElementById(`room-tag-${idx}`).className = 'text-[11px] font-bold text-amber-300';
+    }
+
+    function pressKey(num) {
+      if (enteredCode.length >= 4) return;
+      playChime(523.25, 'sine', 0.12);
+      enteredCode += num;
+      updatePasscodeBoxes();
+    }
+
+    function clearPasscode() {
+      enteredCode = '';
+      updatePasscodeBoxes();
+    }
+
+    function updatePasscodeBoxes() {
+      const slots = document.getElementById('passcode-display').children;
+      for (let i = 0; i < 4; i++) {
+        slots[i].textContent = enteredCode[i] ? enteredCode[i] : '•';
+      }
+    }
+
+    function checkPasscode() {
+      if (enteredCode === '1430') {
+        playChime(880, 'triangle', 0.45);
+        showToast('Lock Opened! ✨');
+        document.getElementById('room-keypad').classList.add('hidden');
+        document.getElementById('room-complete-box').classList.remove('hidden');
+      } else {
+        showToast('Wrong code! Tap the 4 objects above for clues (1430) 🔐');
+        clearPasscode();
+      }
+    }
+
+    /* ==================== CHAPTER 6: CATCH MY STARS (30s ARCADE) ==================== */
+    let arcadeScore = 0;
+    let arcadeTimeLeft = 30;
+    let arcadeTimerInt = null;
+    let arcadeSpawnInt = null;
+    const unlockedMilestones = new Set();
+
+    const arcadeMilestones = [
+      { score: 3, text: '⭐ 3 Stars: Your smile is honestly contagious.' },
+      { score: 6, text: '🌟 6 Stars: That kajal & open hair look stays rent-free in my head.' },
+      { score: 10, text: '💫 10 Stars: Even your cute little pout is undefeated.' },
+      { score: 14, text: '✨ 14 Stars: Talking to you makes any day 10x better.' },
+      { score: 18, text: '❤️ 18 Stars: Max magic unlocked—you are genuinely one of a kind!' }
+    ];
+
+    function startArcadeGame() {
+      arcadeScore = 0;
+      arcadeTimeLeft = 30;
+      unlockedMilestones.clear();
+      document.getElementById('arcade-score').textContent = '0';
+      document.getElementById('arcade-timer').textContent = '30s';
+      document.getElementById('arcade-overlay').classList.add('hidden');
+      document.getElementById('arcade-compliments-list').innerHTML = '';
+
+      const arena = document.getElementById('arcade-arena');
+      arena.querySelectorAll('.drifting-star').forEach(el => el.remove());
+
+      clearInterval(arcadeTimerInt);
+      clearInterval(arcadeSpawnInt);
+
+      spawnArcadeStar();
+      spawnArcadeStar();
+
+      arcadeSpawnInt = setInterval(() => {
+        if (arcadeTimeLeft > 0) spawnArcadeStar();
+      }, 650);
+
+      arcadeTimerInt = setInterval(() => {
+        arcadeTimeLeft--;
+        document.getElementById('arcade-timer').textContent = `${arcadeTimeLeft}s`;
+        if (arcadeTimeLeft <= 0) {
+          finishArcadeRound();
+        }
+      }, 1000);
+    }
+
+    function spawnArcadeStar() {
+      const arena = document.getElementById('arcade-arena');
+      const star = document.createElement('button');
+      star.type = 'button';
+      star.className = 'drifting-star text-2xl sm:text-3xl p-1.5';
+      star.textContent = Math.random() > 0.3 ? '⭐' : '🌠';
+
+      const maxX = Math.max(24, arena.clientWidth - 48);
+      const maxY = Math.max(24, arena.clientHeight - 48);
+      star.style.left = `${Math.floor(Math.random() * maxX)}px`;
+      star.style.top = `${Math.floor(Math.random() * maxY)}px`;
+
+      star.onclick = () => {
+        playChime(659.25, 'sine', 0.14);
+        arcadeScore++;
+        document.getElementById('arcade-score').textContent = arcadeScore;
+        star.remove();
+
+        const list = document.getElementById('arcade-compliments-list');
+        for (const m of arcadeMilestones) {
+          if (arcadeScore >= m.score && !unlockedMilestones.has(m.score)) {
+            unlockedMilestones.add(m.score);
+            const item = document.createElement('div');
+            item.className = 'rounded-xl bg-amber-400/15 border border-amber-300/35 px-3 py-2 text-xs text-amber-100 step-enter';
+            item.textContent = m.text;
+            list.prepend(item);
+          }
+        }
+
+        if (arcadeScore >= 18) {
+          finishArcadeRound();
+        }
+      };
+
+      arena.appendChild(star);
+      setTimeout(() => {
+        if (star.parentNode) star.remove();
+      }, 1900);
+    }
+
+    function finishArcadeRound() {
+      clearInterval(arcadeTimerInt);
+      clearInterval(arcadeSpawnInt);
+      const arena = document.getElementById('arcade-arena');
+      arena.querySelectorAll('.drifting-star').forEach(el => el.remove());
+
+      const overlay = document.getElementById('arcade-overlay');
+      overlay.classList.remove('hidden');
+      overlay.innerHTML = `
+        <p class="text-base font-bold text-amber-200 mb-1">You caught ${arcadeScore} stars! ✨</p>
+        <p class="text-xs text-indigo-200 mb-3">Every star shines a little brighter because of you.</p>
+        <button onclick="startArcadeGame()" class="px-4 py-2 rounded-full glass-night border border-amber-300/40 text-xs font-semibold text-amber-200 cursor-pointer">Play Again ↺</button>
+      `;
+      document.getElementById('arcade-complete-box').classList.remove('hidden');
+    }
+
+    /* ==================== CHAPTER 7: CONNECT THE STARS (HEART CONSTELLATION) ==================== */
+    const heartNodes = [
+      { rx: 0.50, ry: 0.34 },
+      { rx: 0.38, ry: 0.20 },
+      { rx: 0.24, ry: 0.26 },
+      { rx: 0.20, ry: 0.44 },
+      { rx: 0.32, ry: 0.64 },
+      { rx: 0.50, ry: 0.82 },
+      { rx: 0.68, ry: 0.64 },
+      { rx: 0.80, ry: 0.44 },
+      { rx: 0.76, ry: 0.26 },
+      { rx: 0.62, ry: 0.20 }
+    ];
+    let connectedCount = 0;
+
+    function initConstellationCanvas() {
+      const canvas = document.getElementById('constellation-canvas');
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      drawConstellation();
+
+      const handlePointer = (clientX, clientY) => {
+        if (connectedCount >= heartNodes.length) return;
+        const bounds = canvas.getBoundingClientRect();
+        const px = clientX - bounds.left;
+        const py = clientY - bounds.top;
+
+        const target = heartNodes[connectedCount];
+        const tx = target.rx * canvas.width;
+        const ty = target.ry * canvas.height;
+        if (Math.hypot(px - tx, py - ty) <= 34) {
+          playChime(523.25 + connectedCount * 40, 'sine', 0.22);
+          connectedCount++;
+          drawConstellation();
+          if (connectedCount === heartNodes.length) {
+            playChime(880, 'triangle', 0.5);
+            document.getElementById('constellation-reveal').classList.remove('hidden');
+          }
+        }
+      };
+
+      canvas.onclick = (e) => handlePointer(e.clientX, e.clientY);
+      canvas.ontouchmove = (e) => {
+        if (e.touches[0]) handlePointer(e.touches[0].clientX, e.touches[0].clientY);
+      };
+    }
+
+    function drawConstellation() {
+      const canvas = document.getElementById('constellation-canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (connectedCount > 1) {
+        ctx.beginPath();
+        ctx.strokeStyle = '#ffd166';
+        ctx.lineWidth = 2.8;
+        ctx.shadowColor = '#ff758f';
+        ctx.shadowBlur = 14;
+        for (let i = 0; i < connectedCount; i++) {
+          const x = heartNodes[i].rx * canvas.width;
+          const y = heartNodes[i].ry * canvas.height;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        if (connectedCount === heartNodes.length) {
+          ctx.closePath();
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+
+      heartNodes.forEach((node, idx) => {
+        const x = node.rx * canvas.width;
+        const y = node.ry * canvas.height;
+        const isDone = idx < connectedCount;
+        const isNext = idx === connectedCount;
+
+        ctx.beginPath();
+        ctx.arc(x, y, isNext ? 14 : 10, 0, Math.PI * 2);
+        ctx.fillStyle = isDone ? '#ffd166' : isNext ? 'rgba(255, 117, 143, 0.45)' : 'rgba(255, 204, 213, 0.22)';
+        ctx.fill();
+
+        ctx.fillStyle = isDone ? '#090d1f' : '#fffbeb';
+        ctx.font = 'bold 11px Plus Jakarta Sans, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(idx + 1, x, y);
+      });
+    }
+
+    /* ==================== CHAPTER 8: THE LITTLE GARDEN ==================== */
+    const gardenFlowers = [
+      { emoji: '🌹', name: 'Midnight Rose', bloomed: false, reason: 'Your genuine smile makes everything around you feel lighter.' },
+      { emoji: '🪻', name: 'Starlight Lavender', bloomed: false, reason: 'That kajal + open hair look is honestly unforgettable.' },
+      { emoji: '🌷', name: 'Velvet Tulip', bloomed: false, reason: 'Your calm, sweet style makes talking to you so effortless.' },
+      { emoji: '🌼', name: 'Moonflower', bloomed: false, reason: 'Your cute little pouts and expressions are pure magic.' },
+      { emoji: '🪷', name: 'Night Lily', bloomed: false, reason: 'Your character and the person you are make you truly special.' }
+    ];
+
+    function renderGardenPlots() {
+      const container = document.getElementById('garden-plots');
+      container.innerHTML = '';
+
+      gardenFlowers.forEach((f) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rounded-2xl p-3.5 bg-indigo-950/75 border border-rose-300/25 hover:border-rose-300/60 flex flex-col items-center justify-center gap-1.5 cursor-pointer transition min-h-[6.2rem]';
+
+        if (f.bloomed) {
+          btn.innerHTML = `
+            <span class="text-3xl flower-bloomed">${f.emoji}</span>
+            <span class="text-[11px] font-semibold text-rose-200 text-center">${f.name}</span>
+          `;
+        } else {
+          btn.innerHTML = `
+            <span class="text-2xl opacity-80">🌱</span>
+            <span class="text-[11px] text-indigo-300">Water Sprout</span>
+          `;
+        }
+
+        btn.onclick = () => {
+          playChime(659.25, 'sine', 0.25);
+          if (!f.bloomed) {
+            f.bloomed = true;
+            renderGardenPlots();
+          }
+          document.getElementById('garden-reason-text').textContent = `"${f.reason}"`;
+          const total = gardenFlowers.filter(item => item.bloomed).length;
+          document.getElementById('garden-count').textContent = `${total} / 5 Bloomed`;
+          if (total === 5) {
+            document.getElementById('garden-complete-box').classList.remove('hidden');
+          }
+        };
+
+        container.appendChild(btn);
+      });
+    }
+
+    /* ==================== FINALE (STEP 9): HEART ENVELOPE ==================== */
+    function openHeartLifafa() {
+      const envelope = document.getElementById('heart-envelope-box');
+      if (envelope.classList.contains('opened')) return;
+
+      playChime(783.99, 'triangle', 0.55);
+      envelope.classList.add('opened');
+      spawnHeartShower();
+
+      setTimeout(() => {
+        document.getElementById('lifafa-closed-stage').classList.add('hidden');
+        document.getElementById('lifafa-letter-stage').classList.remove('hidden');
+      }, 850);
+    }
+
+    function spawnHeartShower() {
+      const hearts = ['❤️', '💖', '✨', '💌', '🌸'];
+      for (let i = 0; i < 24; i++) {
+        setTimeout(() => {
+          const h = document.createElement('div');
+          h.className = 'floating-heart text-xl sm:text-2xl';
+          h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+          h.style.left = `${Math.random() * 94 + 3}vw`;
+          h.style.bottom = '-30px';
+          h.style.animationDuration = `${Math.random() * 2.4 + 3}s`;
+          document.body.appendChild(h);
+          setTimeout(() => h.remove(), 5600);
+        }, i * 105);
+      }
+    }
+
+    function replayWholeJourney() {
+      // Reset states cleanly for a full replay
+      currentOrderIdx = 0;
+      document.getElementById('cafe-notes-list').innerHTML = '';
+      document.getElementById('cafe-controls').classList.remove('hidden');
+      document.getElementById('cafe-complete-box').classList.add('hidden');
+
+      fireflyPos = { x: 0, y: 2 };
+      forestLanterns.forEach(l => l.lit = false);
+      document.getElementById('forest-lantern-count').textContent = '0 / 3 Lit';
+      document.getElementById('forest-complete-box').classList.add('hidden');
+
+      enteredCode = '';
+      updatePasscodeBoxes();
+      document.getElementById('room-keypad').classList.remove('hidden');
+      document.getElementById('room-complete-box').classList.add('hidden');
+
+      connectedCount = 0;
+      document.getElementById('constellation-reveal').classList.add('hidden');
+
+      gardenFlowers.forEach(f => f.bloomed = false);
+      document.getElementById('garden-count').textContent = '0 / 5 Bloomed';
+      document.getElementById('garden-complete-box').classList.add('hidden');
+
+      document.getElementById('heart-envelope-box').classList.remove('opened');
+      document.getElementById('lifafa-closed-stage').classList.remove('hidden');
+      document.getElementById('lifafa-letter-stage').classList.add('hidden');
+
+      currentStep = 0;
+      goToStep(1);
+    }
+  </script>
+</body>
+</html>
